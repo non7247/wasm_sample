@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>シダを描画</title>
+    </head>
+    <body style="background-color: black;">
+        <h3 style="color:white">ブラウザにシダを描画</h3>
+        <canvas id="canvas" style="border: 1px dotted white"></canvas>
+        <script type="module">
+            import init, { draw_image } from "./pkg/fern.js";
+            init().then(() => {
+                const width = 614;
+                const imageData = draw_image(width, width);
+
+                const canvas = document.getElementById("canvas");
+                canvas.width = canvas.height = width;
+                const ctx = canvas.getContext("2d");
+                const img = new ImageData(new Uint8ClampedArray(imageData), width);
+                ctx.putImageData(img, 0, 0, 0, 0, width, width);
+            });
+        </script>
+    </body>
+</html>
